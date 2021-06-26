@@ -1,0 +1,18 @@
+{
+	"rolltkn": {
+		"title": "Rollable Tokens",
+		"notifications": {
+			"warn": {
+
+			},
+			"error": {
+
+			}
+		},
+		"console": {
+			"debug": {
+
+			}
+		}
+	}
+}
