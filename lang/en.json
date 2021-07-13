@@ -3,7 +3,7 @@
 		"title": "Rollable Tokens",
 		"notifications": {
 			"warn": {
-				"invalidTable": "The table \"{tableName}\" could not be found"
+				"invalidTable": "The table \"{tableId}\" could not be found"
 			},
 			"error": {
 

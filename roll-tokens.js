@@ -102,11 +102,11 @@ class RollTokens {
 		return await renderTemplate("modules/roll-tokens/roll-tokens-tab.hbs", data);
 	}
 
-	static async rollToken(hud, tableName) {
-		console.log(tableName);
-		const table = game.tables.getName(tableName);
+	static async rollToken(hud, tableId) {
+		console.log(tableId);
+		const table = game.tables.get(tableId);
 		if (!table) return ui.notifications.warn(
-			game.i18n.format("rolltkn.notifications.warn.invalidTable", { tableName })
+			game.i18n.format("rolltkn.notifications.warn.invalidTable", { tableId })
 		);
 
 		console.debug(table);
