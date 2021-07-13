@@ -9,6 +9,17 @@
 
 
 class RollTokens {
+	static init() {
+		game.settings.register("roll-tokens", "rollToChat", {
+			name: game.i18n.localize("rolltkn.settings.rollToChat.name"),
+			hint: game.i18n.localize("rolltkn.settings.rollToChat.hint"),
+			scope: "world",
+			config: true,
+			type: Boolean,
+			default: true
+		});
+	}
+
 	static renderTokenHUD(hud, html, data) {
 		const tableName = data.flags?.["roll-tokens"]?.table;
 		if (!tableName) return;
@@ -111,7 +122,9 @@ class RollTokens {
 
 		console.debug(table);
 
-		const roll = await table.roll();
+		const roll = await table.draw({
+			displayChat: game.settings.get("roll-tokens", "rollToChat")
+		});
 		const result = roll.results[0];
 		const img  = result.data.img;
 		const text = result.data.text;
@@ -127,6 +140,8 @@ class RollTokens {
 		});
 	}
 }
+
+Hooks.once("init", RollTokens.init.bind(RollTokens));
 
 Hooks.on("renderTokenHUD", RollTokens.renderTokenHUD.bind(RollTokens));
 Hooks.on("renderTokenConfig", RollTokens.renderTokenConfig.bind(RollTokens));

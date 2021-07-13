@@ -24,6 +24,12 @@
 				"label": "Token Name Interpolation",
 				"notes": "Enter a token name with $$$ in it, the $$$ will be replaced with the text from the Rollable Table entry."
 			}
+		},
+		"settings": {
+			"rollToChat": {
+				"name": "Roll To Chat",
+				"hint": "When randomly rolling a token, should the result be sent to chat or rolled silently?"
+			}
 		}
 	}
 }
