@@ -1,3 +1,13 @@
+/**
+ * @typedef RtFlags - Roll Tokens flags
+ * @property {string} img    - The current image path from the table result
+ * @property {string} text   - The current text from the table result
+ * @property {string} name   - The name substitution string
+ * @property {string} table  - The Rollable Table ID
+ * @property {string} choice - The currently chosen table result ID
+ */
+
+
 class RollTokens {
 	static renderTokenHUD(hud, html, data) {
 		const tableName = data.flags?.["roll-tokens"]?.table;
@@ -53,12 +63,40 @@ class RollTokens {
 		this.activateListeners(html, data);
 	}
 
-		el.after(`
-			<div class="form-group">
-				<label>Token Image Rollable Table</label>
-				<input type="text" name="flags.roll-tokens.table" placeholder="Rollable Table" value="${data.object.flags["roll-tokens"].table || ""}">
-			</div>`
-		);
+	static activateListeners(html, data) {
+		const name = html.find("input[name='flags.roll-tokens.name']");
+		name.change((event) => this.onChangeName(event, html, data));
+
+		html.find(".images .image").click((event) => {
+			const imgInput    = html.find("input[name=img]");
+			const choiceInput = html.find("input[name='flags.roll-tokens.choice']");
+			const image = event.currentTarget;
+			const choice = image.dataset.choice;
+			const img = image.dataset.image;
+			console.log(choice);
+
+			choiceInput.val(choice);
+			imgInput.val(img);
+			//this.onChangeName(event, html, data);
+
+			html.find(".images .image").removeClass("selected");
+			image.classList.add("selected");
+		});
+	}
+
+	static onChangeName(event, html, data) {
+		const nameInput = html.find("input[name=name]");
+		const text = data.object.flags?.["roll-tokens"]?.text;
+		const name = event.target.value.replace(/\$\$\$/, text);
+		nameInput.val(name);
+		console.log(nameInput, name)
+	}
+
+	static getTabControlHtml() {
+		return `<a class="item" data-tab="roll-token"><i class="fas fa-dice"></i> Roll</a>`
+	}
+	static async getRollTokenTabHtml(data) {
+		return await renderTemplate("modules/roll-tokens/roll-tokens-tab.hbs", data);
 	}
 
 	static async rollToken(hud, tableName) {
@@ -72,9 +110,18 @@ class RollTokens {
 
 		const roll = await table.roll();
 		const result = roll.results[0];
-		const img = result.data.img;
+		const img  = result.data.img;
+		const text = result.data.text;
 
-		hud.object.document.update({ img });
+		const template = hud.object.data.flags?.["roll-tokens"]?.name || "";
+		const name = template.replace(/\$\$\$/, text)
+
+		hud.object.document.update({ 
+			img, name,
+			flags: { "roll-tokens": {
+				img, text
+			}}
+		});
 	}
 }
 
