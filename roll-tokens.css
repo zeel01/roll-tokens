@@ -1,3 +1,9 @@
+.item[data-tab=roll-token] {
+	width: max-content;
+	flex: 0;
+	flex-basis: auto;
+}
+
 .roll-tokens .images {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, 100px);
@@ -30,4 +36,8 @@
 	background: #777B;
 	padding: .25em;
 	border-radius: .5em;
+}
+
+.roll-tokens .notes {
+	border: none;
 }

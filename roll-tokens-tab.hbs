@@ -5,17 +5,10 @@
 	<div class="form-group">
 		<label>{{ localize "rolltkn.config.table.label" }}</label>
 		<select name="flags.roll-tokens.table">
-			{{#each tables as |value key|}}
-				<option value="{{value.id}}"
-					{{#if (eq value.id ../rollTokens.table)}}selected{{/if}}
-					>{{value.data.name}}</option>
-			{{/each}}
+			{{ selectOptions tables selected=rollTokens.table blank="" }}
 		</select>
-		<!--input type="text" 
-			name="flags.roll-tokens.table" 
-			placeholder="Rollable Table" 
-			value="{{object.flags.roll-tokens.table}}"-->
 	</div>
+{{#if rollTokens.table}}
 	<div class="form-group">
 		<label>{{ localize "rolltkn.config.name.label" }}</label>
 		<input type="text" 
@@ -24,16 +17,21 @@
 			value="{{object.flags.roll-tokens.name}}">
 		<p class="notes">{{ localize "rolltkn.config.name.notes" }}</p>
 	</div>
-	<input type="hidden" name="flags.roll-tokens.choice" value="{{rollTokens.choice}}">
-	<ul class="images">
-		{{#each tableData.data.results as |value key|}}
-			<li class="image{{#if (eq value.id ../rollTokens.choice)}} selected{{/if}}"
-				data-choice="{{value.id}}"
-				data-text="{{value.data.text}}"
-				data-image="{{value.data.img}}">
-				<img width="100" height="100" title="{{value.data.text}}" src="{{value.data.img}}">
-				<span class="title">{{value.data.text}}</span>
-			</li>
-		{{/each}}
-	</ul>
+	<h3 class="form-header">{{ localize "rolltkn.config.image.label" }}</h3>
+	<div class="form-group">	
+		<input type="hidden" name="flags.roll-tokens.choice" value="{{rollTokens.choice}}">
+		<p class="notes">{{ localize "rolltkn.config.image.notes" }}</p>
+		<ul class="images">
+			{{#each tableData.data.results as |value key|}}
+				<li class="image{{#if (eq value.id ../rollTokens.choice)}} selected{{/if}}"
+					data-choice="{{value.id}}"
+					data-text="{{value.data.text}}"
+					data-image="{{value.data.img}}">
+					<img width="100" height="100" title="{{value.data.text}}" src="{{value.data.img}}">
+					<span class="title">{{value.data.text}}</span>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+{{/if}}
 </div>
