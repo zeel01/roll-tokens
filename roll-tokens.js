@@ -47,8 +47,6 @@ class RollTokens {
 	 * @memberof RollTokens
 	 */
 	static async renderTokenConfig(app, html, data) {
-		console.log(app);
-
 		const imageItem = html.find(".item[data-tab=image]");
 		const imageTab  = html.find(".tab[data-tab=image]");
 		/** @type {RtFlags} */
@@ -56,7 +54,7 @@ class RollTokens {
 		console.debug(flags)
 		const tableId   = flags?.table;
 		
-		data.tables = game.tables;
+		data.tables = Object.fromEntries(game.tables.map(t => [t.id, t.data.name]));
 		data.rollTokens = flags;
 
 		if (tableId) {
@@ -70,7 +68,7 @@ class RollTokens {
 		const item = imageItem.after(this.getTabControlHtml());
 		const tab  = imageTab.after(await this.getRollTokenTabHtml(data));
 
-		app.options.closeOnSubmit = false;
+		//app.options.closeOnSubmit = false;
 
 		this.activateListeners(html, data);
 	}
@@ -99,7 +97,7 @@ class RollTokens {
 
 	static onChangeName(event, html, data) {
 		const nameInput = html.find("input[name=name]");
-		const text = html.find(".image.selected")[0].dataset.text;
+		const text = html.find(".image.selected")[0]?.dataset?.text;
 		const value = html.find("input[name='flags.roll-tokens.name']").val();
 		const name = value.replace(/\$\$\$/, text);
 		nameInput.val(name);

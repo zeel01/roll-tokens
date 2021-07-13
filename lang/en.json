@@ -23,6 +23,10 @@
 			"name": {
 				"label": "Token Name Interpolation",
 				"notes": "Enter a token name with $$$ in it, the $$$ will be replaced with the text from the Rollable Table entry."
+			},
+			"image": {
+				"label": "Token Image Selection",
+				"notes": "Select an image to set the token image and name."
 			}
 		},
 		"settings": {
