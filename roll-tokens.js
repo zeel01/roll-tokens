@@ -40,6 +40,7 @@ class RollTokens {
 
 		const imageItem = html.find(".item[data-tab=image]");
 		const imageTab  = html.find(".tab[data-tab=image]");
+		/** @type {RtFlags} */
 		const flags     = data.object.flags?.["roll-tokens"];
 		console.debug(flags)
 		const tableId   = flags?.table;
@@ -77,17 +78,19 @@ class RollTokens {
 
 			choiceInput.val(choice);
 			imgInput.val(img);
-			//this.onChangeName(event, html, data);
-
+			
 			html.find(".images .image").removeClass("selected");
 			image.classList.add("selected");
+			
+			this.onChangeName(event, html, data);
 		});
 	}
 
 	static onChangeName(event, html, data) {
 		const nameInput = html.find("input[name=name]");
-		const text = data.object.flags?.["roll-tokens"]?.text;
-		const name = event.target.value.replace(/\$\$\$/, text);
+		const text = html.find(".image.selected")[0].dataset.text;
+		const value = html.find("input[name='flags.roll-tokens.name']").val();
+		const name = value.replace(/\$\$\$/, text);
 		nameInput.val(name);
 		console.log(nameInput, name)
 	}
