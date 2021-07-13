@@ -1,7 +1,7 @@
 {
 	"name": "roll-tokens",
 	"title": "Rollable Tokens",
-	"description": "Randomize the image of a Token using a Rollable table.",
+	"description": "Randomize and control the image and name of a Token using a Rollable table.",
 	"author": "zeel",
 	"authors": [
 		{
@@ -11,7 +11,7 @@
 			"discord": "zeel#4200"
 		}
 	],
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"minimumCoreVersion": "0.8.8",
 	"compatibleCoreVersion": "0.8.8",
 	"scripts": [
