@@ -14,8 +14,44 @@ class RollTokens {
 		button.click(this.rollToken.bind(this, hud, tableName));
 	}
 
-	static renderTokenConfig(app, html, data) {
-		const el = html.find(".tab[data-tab=image] .form-group").first();
+	/**
+	 * Handles the renderTokenConfig hook.
+	 *
+	 * Inserts an additional tab into the token config.
+	 *
+	 * @static
+	 * @param {Application} app  - The Application of the token config
+	 * @param {jQuery}      html - A jQuery object representing the application's HTML/DOM
+	 * @param {object}      data - The data used to render the application
+	 * @memberof RollTokens
+	 */
+	static async renderTokenConfig(app, html, data) {
+		console.log(app);
+
+		const imageItem = html.find(".item[data-tab=image]");
+		const imageTab  = html.find(".tab[data-tab=image]");
+		const flags     = data.object.flags?.["roll-tokens"];
+		console.debug(flags)
+		const tableId   = flags?.table;
+		
+		data.tables = game.tables;
+		data.rollTokens = flags;
+
+		if (tableId) {
+			const tableData = game.tables.get(tableId);
+			if (tableData) {
+				data.table = true;
+				data.tableData = tableData;
+			}
+		}
+
+		const item = imageItem.after(this.getTabControlHtml());
+		const tab  = imageTab.after(await this.getRollTokenTabHtml(data));
+
+		app.options.closeOnSubmit = false;
+
+		this.activateListeners(html, data);
+	}
 
 		el.after(`
 			<div class="form-group">
