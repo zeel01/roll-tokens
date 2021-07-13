@@ -13,6 +13,17 @@
 			"debug": {
 
 			}
+		},
+		"config": {
+			"title": "Roll",
+			"description": "Configure a rollable token image.",
+			"table": {
+				"label": "Token Image Rollable Table"
+			},
+			"name": {
+				"label": "Token Name Interpolation",
+				"notes": "Enter a token name with $$$ in it, the $$$ will be replaced with the text from the Rollable Table entry."
+			}
 		}
 	}
 }
