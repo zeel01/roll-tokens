@@ -26,12 +26,13 @@ class RollTokens {
 
 		const col = html.find(".col.right");
 
-		const button = col.append(`
+		const button = $(`
 			<div class="control-icon">
 				<i class="fas fa-sync"></i>
 			</div>
 		`);
-		
+
+		col.append(button);
 		button.click(this.rollToken.bind(this, hud, tableName));
 	}
 
@@ -65,8 +66,8 @@ class RollTokens {
 			}
 		}
 
-		const item = imageItem.after(this.getTabControlHtml());
-		const tab  = imageTab.after(await this.getRollTokenTabHtml(data));
+		imageItem.after(this.getTabControlHtml());
+		imageTab.after(await this.getRollTokenTabHtml(data));
 
 		//app.options.closeOnSubmit = false;
 
