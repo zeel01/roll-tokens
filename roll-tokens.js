@@ -6,8 +6,7 @@
  * @property {string} table  - The Rollable Table ID
  * @property {string} choice - The currently chosen table result ID
  */
-
-
+ 
 class RollTokens {
 	static init() {
 		game.settings.register("roll-tokens", "rollToChat", {
@@ -48,8 +47,8 @@ class RollTokens {
 	 * @memberof RollTokens
 	 */
 	static async renderTokenConfig(app, html, data) {
-		const imageItem = html.find(".item[data-tab=image]");
-		const imageTab  = html.find(".tab[data-tab=image]");
+		const imageItem = html.find(".item[data-tab=appearance]");
+		const imageTab  = html.find(".tab[data-tab=appearance]");
 		/** @type {RtFlags} */
 		const flags     = data.object.flags?.["roll-tokens"];
 		console.debug(flags)
